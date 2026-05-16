@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistem Karyawan</title>
+    <link rel="icon" type="image/png" href="https://iili.io/F0B1fSf.jpg">
+    <style>
+        /* Menggunakan dvh agar pas di HP dan antisipasi URL bar */
+        body, html {
+            margin: 0; padding: 0; 
+            width: 100%; height: 100%;
+            height: 100dvh; 
+            overflow: hidden; 
+            background-color: #ffffff;
+            font-family: sans-serif;
+            display: flex; 
+            flex-direction: column;
+        }
+        
+        /* Area Konten */
+        .content {
+            flex: 1; 
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none; 
+            display: none;
+        }
+
+        iframe.active { display: block; }
+
+        /* Navigasi Bawah */
+        .bottom-nav {
+            height: 65px; 
+            display: flex;
+            background-color: #f8f9fa; 
+            border-top: 1px solid #ddd;
+            padding-bottom: env(safe-area-inset-bottom); /* Support iPhone notch bawah */
+            box-sizing: content-box;
+        }
+        
+        .tab-btn {
+            flex: 1; border: none; background: transparent;
+            font-size: 13px; cursor: pointer; font-weight: bold;
+            outline: none; transition: 0.2s;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+
+        /* Tombol Rekap (Hijau) */
+        #btnRekap { color: #188038; border-right: 1px solid #eee; }
+        #btnRekap.active { background-color: #e6f4ea; border-top: 4px solid #188038; }
+
+        /* Tombol Agen (Kuning/Orange) */
+        #btnAgen { color: #d48806; }
+        #btnAgen.active { background-color: #fffbe6; border-top: 4px solid #d48806; }
+    </style>
+</head>
+<body>
+
+    <div class="content">
+        <!-- LINK 1: Rekap (Aktif Pertama) -->
+        <iframe id="frameRekap" class="active" 
+            src="https://script.google.com/a/~/macros/s/AKfycbykBwTIxGEC3yb_ISBodT4-2q8v5wazWKUSy3TJ2l-IFyjxp8H-mMGNb6Z7OqFnLE3BEw/exec"></iframe>
+        
+        <!-- LINK 2: Agen -->
+        <iframe id="frameAgen"
+            src="https://script.google.com/a/~/macros/s/AKfycbwnCWw9MW6r3zXfOYaLnccDS0Aicn6lX1l-MNYJDSkYR-am2X3a2VR_UrQYwBzMtchFeQ/exec"></iframe>
+    </div>
+
+    <div class="bottom-nav">
+        <button id="btnRekap" class="tab-btn active" onclick="switchTab('rekap')">
+            <span>📊</span>
+            Rekap
+        </button>
+        <button id="btnAgen" class="tab-btn" onclick="switchTab('agen')">
+            <span>📝</span>
+            Registrasi Calon Agen
+        </button>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const fRekap = document.getElementById('frameRekap');
+            const fAgen = document.getElementById('frameAgen');
+            const bRekap = document.getElementById('btnRekap');
+            const bAgen = document.getElementById('btnAgen');
+
+            if (tab === 'rekap') {
+                fRekap.classList.add('active');
+                fAgen.classList.remove('active');
+                bRekap.classList.add('active');
+                bAgen.classList.remove('active');
+            } else if (tab === 'agen') {
+                fAgen.classList.add('active');
+                fRekap.classList.remove('active');
+                bAgen.classList.add('active');
+                bRekap.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>
